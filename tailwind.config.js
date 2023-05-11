@@ -19,10 +19,10 @@ export default {
         custom: "0 2px 15px",
       },
       borderRadius: {
-        custom: "4px",
+        custom: "6px",
       },
       borderWidth: {
-        custom: "1px",
+        custom: "2px",
       },
     },
   },
