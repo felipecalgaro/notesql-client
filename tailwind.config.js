@@ -1,8 +1,14 @@
 /** @type {import('tailwindcss').Config} */
+import defaultTheme from "tailwindcss/defaultTheme";
+
 export default {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      screens: {
+        xs: "480px",
+        ...defaultTheme.screens,
+      },
       colors: {
         "light-primary": "#D6A72F",
         "dark-primary": "#907122",
