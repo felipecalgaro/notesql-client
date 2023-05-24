@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import NotesImage from '../assets/notes.svg'
 import Button from '../components/Button'
 import Header from '../components/Header'
@@ -13,7 +14,9 @@ export default function Home() {
           </div>
           <div className='flex items-center xs:justify-between justify-center xs:w-11/12 w-full gap-x-2 gap-y-4 flex-wrap'>
             <p className='text-white xs:text-start text-center sm:text-xl xs:text-lg text-base xs:w-2/3 w-5/6'>Your new best choice to take notes the easiest way.</p>
-            <Button isOutline={true} palette='primary' text='Sign Up' />
+            <Link to='/sign-up'>
+              <Button isOutline={true} palette='primary' text='Sign Up' />
+            </Link>
           </div>
         </div>
         <div className='basis-80'>
