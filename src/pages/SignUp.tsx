@@ -1,9 +1,38 @@
 import BlobImage from '../assets/blob.svg'
 import Input from '../components/Input';
 import Button from '../components/Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import { CREATE_USER, CreateUserResponseData } from '../services/createUser';
+import { FormEvent, useEffect } from 'react';
+import ErrorMessage from '../components/ErrorMessage';
 
 export default function SignUp() {
+  const [createUser, { data, error }] = useMutation<CreateUserResponseData>(CREATE_USER)
+  const navigate = useNavigate()
+
+  async function handleSubmit(event: FormEvent) {
+    event.preventDefault()
+
+    const formData = new FormData(event.target as HTMLFormElement)
+    const { name, email, password } = Object.fromEntries(formData)
+
+    if ([name, email, password].includes('')) return
+
+    try {
+      await createUser({ variables: { user: { name, email, password } } })
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  useEffect(() => {
+    if (data) {
+      localStorage.setItem('token', data.createUser.token)
+      navigate('/my-notes', { state: { userId: data.createUser.user.id } })
+    }
+  }, [data, navigate])
+
   return (
     <div className='bg-dark-gray-custom h-screen relative overflow-hidden'>
       <header>
@@ -18,11 +47,12 @@ export default function SignUp() {
             <p className='text-white lg:text-6xl xs:text-5xl text-3xl font-medium text-center'>Sign Up to NotesQL</p>
             <p className='text-white lg:text-2xl xs:text-xl text-base text-center'>Already have an account? <Link to='/sign-in' className='text-light-secondary whitespace-nowrap'>Sign In</Link></p>
           </div>
-          <form className='flex flex-col items-center justify-center gap-12'>
-            <Input id='name' label='Name' placeholder='Your name' type='text' />
-            <Input id='email' label='Email' placeholder='Your email' type='email' />
-            <Input id='password' label='Password' placeholder='Your password' type='password' />
-            <div className='flex justify-end items-center w-full pt-4'>
+          <form onSubmit={handleSubmit} className='flex flex-col items-center justify-center gap-12'>
+            <Input name='name' id='name' label='Name' placeholder='Your name' type='text' />
+            <Input name='email' id='email' label='Email' placeholder='Your email' type='email' />
+            <Input name='password' id='password' label='Password' placeholder='Your password' type='password' />
+            <ErrorMessage message={error?.message} />
+            <div className='flex justify-end items-center w-full pt-4 px-4'>
               <Button isOutline={false} palette='secondary' text='Submit' />
             </div>
           </form>
