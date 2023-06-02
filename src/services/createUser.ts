@@ -1,10 +1,10 @@
 import { gql } from "@apollo/client";
-import { User } from "../types/user";
+import { IUser } from "../types/user";
 
 export interface CreateUserResponseData {
   createUser: {
     token: string;
-    user: User;
+    user: IUser;
   };
 }
 
