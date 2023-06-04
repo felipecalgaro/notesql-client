@@ -4,10 +4,13 @@ import defaultTheme from "tailwindcss/defaultTheme";
 export default {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    screens: {
+      xs: "480px",
+      ...defaultTheme.screens,
+    },
     extend: {
       screens: {
-        xs: "480px",
-        ...defaultTheme.screens,
+        md: "900px",
       },
       colors: {
         "light-primary": "#D6A72F",
