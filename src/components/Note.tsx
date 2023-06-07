@@ -3,7 +3,6 @@ import { INote, Status } from '../types/note'
 import NoteButton from './NoteButton'
 import { PRIORITIZE_NOTE } from '../services/prioritizeNote'
 import classNames from 'classnames'
-import ErrorMessage from './ErrorMessage'
 import { BookmarkSimple, Check, TrashSimple } from 'phosphor-react'
 import { UPDATE_STATUS } from '../services/changeStatus'
 import { DELETE_NOTE } from '../services/deleteNote'
@@ -13,7 +12,7 @@ type NoteProps = Pick<INote, 'title' | 'body' | 'status' | 'priority' | 'id'> & 
 }
 
 export default function Note({ body, priority, status, title, id, refetchNotes }: NoteProps) {
-  const [prioritizeNote, { error }] = useMutation(PRIORITIZE_NOTE)
+  const [prioritizeNote] = useMutation(PRIORITIZE_NOTE)
   const [updateStatus] = useMutation(UPDATE_STATUS)
   const [deleteNote] = useMutation(DELETE_NOTE)
 
@@ -28,15 +27,14 @@ export default function Note({ body, priority, status, title, id, refetchNotes }
       'border-gray-custom': !priority,
       'line-through decoration-1': status === Status.FINISHED
     })}>
-      <div className='flex flex-col items-start w-full gap-6'>
+      <div className='flex flex-col items-start w-full gap-6 overflow-auto scrollbar-custom pe-4'>
         <p className='text-2xl font-semibold'>{title}</p>
-        <p className='text-xl italic'>{body}</p>
+        <p className='text-xl italic mb-1 leading-6'>{body}</p>
       </div>
-      <div className='flex justify-end w-full gap-2'>
+      <div className='flex justify-end w-full gap-2 pb-1'>
         <NoteButton mutationFunction={prioritizeNote} mutationVariables={{ id, priority: !priority }} icon={BookmarkSimple} active={priority} />
         <NoteButton mutationFunction={updateStatus} mutationVariables={{ status: status === Status.FINISHED ? Status.UNFINISHED : Status.FINISHED, id }} icon={Check} active={status === Status.FINISHED} />
         <NoteButton mutationFunction={deleteNoteAndRefetchNotes} mutationVariables={{ id }} icon={TrashSimple} active={false} />
-        <ErrorMessage message={error?.message} />
       </div>
     </div>
   )

@@ -21,7 +21,7 @@ export default function NoteButton({ mutationFunction, mutationVariables, icon: 
         variables: mutationVariables,
         context: { headers: { 'Authorization': localStorage.getItem('token') } }
       })}
-      className={classNames('rounded-full w-9 h-9 border-light-primary border-[1px] cursor-pointer transition-colors flex justify-center items-center active:scale-[0.98]', {
+      className={classNames('rounded-full w-9 aspect-square border-light-primary border-[1px] cursor-pointer transition-colors flex justify-center items-center active:scale-[0.98]', {
         'hover:bg-light-primary text-light-primary hover:text-black': !active,
         'text-black bg-light-primary': active,
       })}>
