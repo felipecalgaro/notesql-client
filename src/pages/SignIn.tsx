@@ -28,7 +28,7 @@ export default function SignIn() {
   useEffect(() => {
     if (data) {
       localStorage.setItem('token', data.authenticateUser.token)
-      navigate('/my-notes', { state: { userId: data.authenticateUser.user.id } })
+      navigate(`/my-notes/${data.authenticateUser.user.id}`)
     }
   }, [data, navigate])
 
