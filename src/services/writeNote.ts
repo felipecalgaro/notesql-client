@@ -1,4 +1,9 @@
 import { gql } from "@apollo/client";
+import { INote } from "../types/note";
+
+export interface WriteNoteResponseData {
+  writeNote: INote;
+}
 
 export const WRITE_NOTE = gql`
   mutation WriteNote($note: NoteInput!) {
@@ -6,6 +11,9 @@ export const WRITE_NOTE = gql`
       id
       title
       body
+      author {
+        name
+      }
     }
   }
 `;
