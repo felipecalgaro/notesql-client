@@ -1,7 +1,17 @@
 @tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 html {
   font-family: "Urbanist", "sans-serif";
 }
+
+.scrollbar-custom::-webkit-scrollbar {
+  width: 10px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background-color: #3f3f3f;
+  border-radius: 10px;
+}
+
+@tailwind components;
+@tailwind utilities;
