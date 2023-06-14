@@ -25,7 +25,7 @@ export default function Note({ body, priority, status, title, id, refetchNotes }
     <div className={classNames('border-[1px] flex flex-col gap-12 rounded-custom w-4/5 text-white pt-6 pl-6 pr-3 pb-2', {
       'border-light-primary': priority,
       'border-gray-custom': !priority,
-      'line-through decoration-1': status === Status.FINISHED
+      'line-through decoration-2': status === Status.FINISHED
     })}>
       <div className='flex flex-col items-start w-full gap-6 overflow-auto scrollbar-custom pe-4'>
         <p className='text-2xl font-semibold'>{title}</p>
