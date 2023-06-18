@@ -6,7 +6,7 @@ import Header from '../components/Header'
 export default function Home() {
   return (
     <div className='bg-dark-gray-custom h-screen'>
-      <Header />
+      <Header isLogged={false} />
       <main className='flex justify-center items-center flex-wrap xl:gap-x-60 gap-x-20 h-4/5 xs:mx-16 mx-10'>
         <div className='flex flex-col justify-evenly xs:h-2/3 h-1/2 xs:w-min w-auto'>
           <div className='xs:w-1/2 w-full flex items-center xs:justify-start justify-center whitespace-nowrap'>

@@ -1,17 +1,18 @@
 import { NetworkStatus, useQuery } from '@apollo/client'
-import { GET_NOTES_BY_AUTHOR, GetNotesByAuthorResponseData } from '../services/getNotesByAuthor'
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { GET_USER_AND_NOTES, GetUserAndNotesResponseData } from '../services/getUserAndNotes'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import Note from '../components/Note'
 import { Plus } from 'phosphor-react'
 import { MouseEvent as ReactMouseEvent, useEffect } from 'react'
+import Header from '../components/Header'
 
 export default function MyNotes() {
   const location = useLocation()
-  const newNote = location.state?.newNote
+  const { name, newNote } = location.state
   const { userId } = useParams()
-  const { data, loading, refetch, networkStatus } = useQuery<GetNotesByAuthorResponseData>(GET_NOTES_BY_AUTHOR, {
+  const { data, loading, refetch, networkStatus } = useQuery<GetUserAndNotesResponseData>(GET_USER_AND_NOTES, {
     context: { headers: { 'Authorization': localStorage.getItem('token') } },
-    variables: { authorId: userId },
+    variables: { id: userId },
     notifyOnNetworkStatusChange: true
   })
   const navigate = useNavigate()
@@ -19,8 +20,10 @@ export default function MyNotes() {
   function handleNavigate(e: ReactMouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault()
 
-    navigate(`/write-note/${userId}`)
+    navigate(`/write-note/${userId}`, { state: { name } })
   }
+
+  const notes = data?.getUserAndNotes.notes?.filter((note) => !note.deleted_at)
 
   useEffect(() => {
     if (newNote) {
@@ -30,21 +33,16 @@ export default function MyNotes() {
 
   return (
     <div className='bg-dark-gray-custom min-h-screen pb-20'>
-      <header>
-        <nav className='flex justify-center items-center xs:px-10 px-3 py-4'>
-          <Link to='' className='text-white font-semibold text-4xl'>NotesQL</Link>
-        </nav>
-        <hr className='border-[#1c1c1c] border-[1px]' />
-      </header>
-      <main className='flex flex-col justify-center items-center flex-wrap h-full xs:px-8 px-0 lg:gap-x-40 gap-x-20 pt-20'>
+      <Header isLogged name={name} userId={userId} />
+      <main className='flex flex-col justify-center items-center h-full xs:px-8 px-0 lg:gap-x-40 gap-x-20 pt-20'>
         <p className='text-white text-5xl font-light text-center'>My Notes</p>
         {loading || networkStatus === NetworkStatus.refetch ? (
           <p className='text-white text-4xl mt-40'>Loading...</p>
         ) : (
           <>
-            {data?.getNotesByAuthor.length ? (
+            {notes ? (
               <div className='mt-20 flex flex-col gap-24 w-full items-center'>
-                {data?.getNotesByAuthor.map((note) => <Note key={note.id} id={note.id} body={note.body} priority={note.priority} status={note.status} title={note.title} refetchNotes={refetch} />)}
+                {notes.map((note) => <Note key={note.id} id={note.id} body={note.body} priority={note.priority} status={note.status} title={note.title} refetchNotes={refetch} />)}
               </div>
             ) : (
               <p className='text-white text-2xl mt-40'>You don't have any notes yet.</p>

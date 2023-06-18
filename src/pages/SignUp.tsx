@@ -29,7 +29,7 @@ export default function SignUp() {
   useEffect(() => {
     if (data) {
       localStorage.setItem('token', data.createUser.token)
-      navigate(`/my-notes/${data.createUser.user.id}`)
+      navigate(`/my-notes/${data.createUser.user.id}`, { state: { name: data.createUser.user.name } })
     }
   }, [data, navigate])
 
