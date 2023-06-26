@@ -6,8 +6,8 @@ export interface GetUserAndNotesResponseData {
 }
 
 export const GET_USER_AND_NOTES = gql`
-  query GetUserAndNotes($id: ID!) {
-    getUserAndNotes(id: $id) {
+  query GetUserAndNotes {
+    getUserAndNotes {
       name
       email
       avatar_url
