@@ -12,7 +12,6 @@ export default function MyNotes() {
   const { userId } = useParams()
   const { data, loading, refetch, networkStatus } = useQuery<GetUserAndNotesResponseData>(GET_USER_AND_NOTES, {
     context: { headers: { 'Authorization': localStorage.getItem('token') } },
-    variables: { id: userId },
     notifyOnNetworkStatusChange: true
   })
   const navigate = useNavigate()
@@ -40,23 +39,23 @@ export default function MyNotes() {
           <p className='text-white text-4xl mt-40'>Loading...</p>
         ) : (
           <>
-            {notes ? (
+            {notes?.length !== 0 ? (
               <div className='mt-20 flex flex-col gap-24 w-full items-center'>
-                {notes.map((note) => <Note key={note.id} id={note.id} body={note.body} priority={note.priority} status={note.status} title={note.title} refetchNotes={refetch} />)}
+                {notes?.map((note) => <Note key={note.id} id={note.id} body={note.body} priority={note.priority} status={note.status} title={note.title} refetchNotes={refetch} />)}
               </div>
             ) : (
               <p className='text-white text-2xl mt-40'>You don't have any notes yet.</p>
             )}
+            <div className='flex justify-center items-center pt-32 px-4 w-4/5'>
+              <button
+                className='rounded-[100%] bg-light-primary p-4 shadow-custom shadow-light-primary/40 hover:-translate-y-0.5 active:scale-[0.96] active:shadow-none duration-300'
+                onClick={handleNavigate}
+              >
+                <Plus size={32} />
+              </button>
+            </div>
           </>
         )}
-        <div className='flex justify-center items-center pt-32 px-4 w-4/5'>
-          <button
-            className='rounded-[100%] bg-light-primary p-4 shadow-custom shadow-light-primary/40 hover:-translate-y-0.5 active:scale-[0.96] active:shadow-none duration-300'
-            onClick={handleNavigate}
-          >
-            <Plus size={32} />
-          </button>
-        </div>
       </main>
     </div>
   )
