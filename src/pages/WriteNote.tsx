@@ -15,8 +15,6 @@ export default function WriteNote() {
   const { name } = location.state
   const navigate = useNavigate()
 
-  console.log(location);
-
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
 
@@ -29,7 +27,6 @@ export default function WriteNote() {
           note: {
             title,
             body,
-            authorId: userId
           }
         },
         context: {
