@@ -15,6 +15,7 @@ export const CREATE_USER = gql`
       user {
         id
         name
+        avatar_url
       }
     }
   }
