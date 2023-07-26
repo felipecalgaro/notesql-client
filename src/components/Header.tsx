@@ -6,9 +6,10 @@ interface HeaderProps {
   isLogged: boolean
   name?: string
   userId?: string
+  avatar_url?: string
 }
 
-export default function Header({ isLogged, name, userId }: HeaderProps) {
+export default function Header({ isLogged, name, userId, avatar_url }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -17,7 +18,7 @@ export default function Header({ isLogged, name, userId }: HeaderProps) {
         <h1 className='text-white font-semibold xs:text-4xl text-2xl'>NotesQL</h1>
         {isLogged ? (
           <div className='flex xs:gap-x-3 gap-x-2 justify-center items-center text-white'>
-            <div className='xs:w-8 w-7 aspect-square rounded-full bg-blue-800'></div>
+            <img className='xs:w-10 w-8 aspect-square rounded-full' src={avatar_url} />
             <div className='flex gap-x-0.5 justify-center items-center cursor-pointer' onClick={() => setIsOpen(prev => !prev)}>
               <p className='font-medium text-white xs:text-xl text-lg'>{name}</p>
               <CaretDown size={20} />
