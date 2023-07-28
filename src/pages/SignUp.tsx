@@ -6,10 +6,14 @@ import { useMutation } from '@apollo/client';
 import { CREATE_USER, CreateUserResponseData } from '../services/createUser';
 import { FormEvent, useEffect } from 'react';
 import ErrorMessage from '../components/ErrorMessage';
+import { UserContext } from '../App';
+import { useContext } from 'react'
+import { userContextOnLocalStorage } from '../utils/userContextOnLocalStorage';
 
 export default function SignUp() {
   const [createUser, { data, error }] = useMutation<CreateUserResponseData>(CREATE_USER)
   const navigate = useNavigate()
+  const { setUser } = useContext(UserContext)
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
@@ -29,9 +33,11 @@ export default function SignUp() {
   useEffect(() => {
     if (data) {
       localStorage.setItem('token', data.createUser.token)
-      navigate(`/my-notes/${data.createUser.user.id}`, { state: { name: data.createUser.user.name } })
+      userContextOnLocalStorage.set(data.createUser.user.name, data.createUser.user.avatar_url)
+      setUser({ avatar_url: data.createUser.user.avatar_url, name: data.createUser.user.name })
+      navigate(`/my-notes/${data.createUser.user.id}`)
     }
-  }, [data, navigate])
+  }, [data, navigate, setUser])
 
   return (
     <div className='bg-dark-gray-custom h-screen relative overflow-hidden'>

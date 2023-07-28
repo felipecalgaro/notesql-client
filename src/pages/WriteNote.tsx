@@ -1,6 +1,6 @@
 import Input from '../components/Input';
 import Button from '../components/Button';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FormEvent } from 'react';
 import { useMutation } from '@apollo/client';
 import { useEffect } from 'react'
@@ -11,8 +11,6 @@ import Header from '../components/Header';
 export default function WriteNote() {
   const [writeNote, { error, data }] = useMutation<WriteNoteResponseData>(WRITE_NOTE)
   const { userId } = useParams()
-  const location = useLocation()
-  const { name } = location.state
   const navigate = useNavigate()
 
   async function handleSubmit(event: FormEvent) {
@@ -42,13 +40,13 @@ export default function WriteNote() {
 
   useEffect(() => {
     if (data) {
-      navigate(`/my-notes/${userId}`, { state: { newNote: true, name } })
+      navigate(`/my-notes/${userId}`)
     }
-  }, [data, navigate, userId, name])
+  }, [data, navigate, userId])
 
   return (
     <div className='bg-dark-gray-custom min-h-screen'>
-      <Header isLogged name={name} userId={userId} />
+      <Header isLogged userId={userId} />
       <main className='flex flex-col justify-center items-center h-full lg:px-40 md:px-12 px-0 pt-20'>
         <p className='text-white text-5xl font-light text-center'>New Note</p>
         <form onSubmit={handleSubmit} className='flex flex-col items-start justify-center gap-12 pt-24 2xl:w-1/2 md:w-2/3 xs:w-3/4 w-full xs:px-0 px-2'>

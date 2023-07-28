@@ -5,12 +5,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FormEvent } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { AUTHENTICATE_USER, AuthenticateUserResponseData } from '../services/authenticateUser';
-import { useEffect } from 'react'
+import { useEffect, useContext } from 'react'
 import ErrorMessage from '../components/ErrorMessage';
+import { UserContext } from '../App';
+import { userContextOnLocalStorage } from '../utils/userContextOnLocalStorage';
 
 export default function SignIn() {
   const [authenticateUser, { data, error }] = useLazyQuery<AuthenticateUserResponseData>(AUTHENTICATE_USER)
   const navigate = useNavigate()
+  const { setUser } = useContext(UserContext)
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
@@ -28,9 +31,11 @@ export default function SignIn() {
   useEffect(() => {
     if (data) {
       localStorage.setItem('token', data.authenticateUser.token)
-      navigate(`/my-notes/${data.authenticateUser.user.id}`, { state: { name: data.authenticateUser.user.name } })
+      userContextOnLocalStorage.set(data.authenticateUser.user.name, data.authenticateUser.user.avatar_url)
+      setUser({ avatar_url: data.authenticateUser.user.avatar_url, name: data.authenticateUser.user.name })
+      navigate(`/my-notes/${data.authenticateUser.user.id}`)
     }
-  }, [data, navigate])
+  }, [data, navigate, setUser])
 
   return (
     <div className='bg-dark-gray-custom min-h-screen'>
