@@ -1,16 +1,17 @@
 import { CaretDown } from 'phosphor-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { userContextOnLocalStorage } from '../utils/userContextOnLocalStorage';
+import { useFetchUserContext } from '../hooks/useFetchtUserContext';
 
 interface HeaderProps {
   isLogged: boolean
-  name?: string
   userId?: string
-  avatar_url?: string
 }
 
-export default function Header({ isLogged, name, userId, avatar_url }: HeaderProps) {
+export default function Header({ isLogged, userId }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const user = useFetchUserContext()
 
   return (
     <header className='relative select-none'>
@@ -18,18 +19,18 @@ export default function Header({ isLogged, name, userId, avatar_url }: HeaderPro
         <h1 className='text-white font-semibold xs:text-4xl text-2xl'>NotesQL</h1>
         {isLogged ? (
           <div className='flex xs:gap-x-3 gap-x-2 justify-center items-center text-white'>
-            <img className='xs:w-10 w-8 aspect-square rounded-full' src={avatar_url} />
+            <img className='xs:w-10 w-8 aspect-square rounded-full' src={user.avatar_url} />
             <div className='flex gap-x-0.5 justify-center items-center cursor-pointer' onClick={() => setIsOpen(prev => !prev)}>
-              <p className='font-medium text-white xs:text-xl text-lg'>{name}</p>
+              <p className='font-medium text-white xs:text-xl text-lg'>{user.name}</p>
               <CaretDown size={20} />
             </div>
             {isOpen && (
               <div className='bg-dark-gray-custom border-[#1c1c1c] border-t-0 border-custom w-40 py-4 xs:pl-8 pl-10 absolute right-2 xs:top-[4.5rem] top-16 text-left font-medium xs:text-lg text-base'>
                 <ul className='flex flex-col gap-y-1'>
-                  <li><Link to={`/my-account/${userId}`} state={{ name }}>My Account</Link></li>
-                  <li><Link to={`/my-notes/${userId}`} state={{ name }}>My Notes</Link></li>
-                  <li><Link to={`/write-note/${userId}`} state={{ name }}>Write Note</Link></li>
-                  <li><Link to='/'>Sign Out</Link></li>
+                  <li><Link to={`/my-account/${userId}`}>My Account</Link></li>
+                  <li><Link to={`/my-notes/${userId}`}>My Notes</Link></li>
+                  <li><Link to={`/write-note/${userId}`}>Write Note</Link></li>
+                  <li><Link to='/' onClick={userContextOnLocalStorage.remove}>Sign Out</Link></li>
                 </ul>
               </div>
             )}
