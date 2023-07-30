@@ -9,5 +9,6 @@ export function useFetchUserContext() {
     : {
         name: localStorage.getItem("name") || undefined,
         avatar_url: localStorage.getItem("avatar_url") || undefined,
+        isAuthenticated: false,
       };
 }

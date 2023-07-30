@@ -1,8 +1,9 @@
 import { CaretDown } from 'phosphor-react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { userContextOnLocalStorage } from '../utils/userContextOnLocalStorage';
-import { useFetchUserContext } from '../hooks/useFetchtUserContext';
+import { useFetchUserContext } from '../hooks/useFetchUserContext';
+import { UserContext } from '../App';
 
 interface HeaderProps {
   isLogged: boolean
@@ -12,6 +13,12 @@ interface HeaderProps {
 export default function Header({ isLogged, userId }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false)
   const user = useFetchUserContext()
+  const { setUser } = useContext(UserContext)
+
+  function handleLogOut() {
+    userContextOnLocalStorage.remove()
+    setUser({ isAuthenticated: false, avatar_url: undefined, name: undefined })
+  }
 
   return (
     <header className='relative select-none'>
@@ -30,7 +37,7 @@ export default function Header({ isLogged, userId }: HeaderProps) {
                   <li><Link to={`/my-account/${userId}`}>My Account</Link></li>
                   <li><Link to={`/my-notes/${userId}`}>My Notes</Link></li>
                   <li><Link to={`/write-note/${userId}`}>Write Note</Link></li>
-                  <li><Link to='/' onClick={userContextOnLocalStorage.remove}>Sign Out</Link></li>
+                  <li><Link to='/' onClick={handleLogOut}>Sign Out</Link></li>
                 </ul>
               </div>
             )}

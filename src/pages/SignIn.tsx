@@ -32,7 +32,7 @@ export default function SignIn() {
     if (data) {
       localStorage.setItem('token', data.authenticateUser.token)
       userContextOnLocalStorage.set(data.authenticateUser.user.name, data.authenticateUser.user.avatar_url)
-      setUser({ avatar_url: data.authenticateUser.user.avatar_url, name: data.authenticateUser.user.name })
+      setUser({ avatar_url: data.authenticateUser.user.avatar_url, name: data.authenticateUser.user.name, isAuthenticated: true })
       navigate(`/my-notes/${data.authenticateUser.user.id}`)
     }
   }, [data, navigate, setUser])

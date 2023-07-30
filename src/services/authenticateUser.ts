@@ -17,6 +17,7 @@ export const AUTHENTICATE_USER = gql`
         name
         email
         password
+        avatar_url
       }
     }
   }

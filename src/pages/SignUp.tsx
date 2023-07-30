@@ -11,7 +11,7 @@ import { useContext } from 'react'
 import { userContextOnLocalStorage } from '../utils/userContextOnLocalStorage';
 
 export default function SignUp() {
-  const [createUser, { data, error }] = useMutation<CreateUserResponseData>(CREATE_USER)
+  const [createUser, { data, error, loading }] = useMutation<CreateUserResponseData>(CREATE_USER)
   const navigate = useNavigate()
   const { setUser } = useContext(UserContext)
 
@@ -34,7 +34,7 @@ export default function SignUp() {
     if (data) {
       localStorage.setItem('token', data.createUser.token)
       userContextOnLocalStorage.set(data.createUser.user.name, data.createUser.user.avatar_url)
-      setUser({ avatar_url: data.createUser.user.avatar_url, name: data.createUser.user.name })
+      setUser({ avatar_url: data.createUser.user.avatar_url, name: data.createUser.user.name, isAuthenticated: true })
       navigate(`/my-notes/${data.createUser.user.id}`)
     }
   }, [data, navigate, setUser])
@@ -59,7 +59,7 @@ export default function SignUp() {
             <Input name='password' id='password' label='Password' placeholder='Your password' type='password' />
             <ErrorMessage message={error?.message} />
             <div className='flex justify-end items-center w-full pt-4 px-4'>
-              <Button isOutline={false} palette='secondary' text='Submit' />
+              <Button isOutline={false} palette='secondary' text='Submit' loading={loading} />
             </div>
           </form>
         </div>

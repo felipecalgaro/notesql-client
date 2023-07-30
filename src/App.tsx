@@ -11,6 +11,7 @@ import { createContext, useState } from 'react'
 type UserContextProps = {
   name?: string
   avatar_url?: string
+  isAuthenticated: boolean
 }
 
 type ContextProps = {
@@ -21,7 +22,7 @@ type ContextProps = {
 export const UserContext = createContext<ContextProps>(null as unknown as ContextProps)
 
 function App() {
-  const [user, setUser] = useState<UserContextProps>({})
+  const [user, setUser] = useState<UserContextProps>({ isAuthenticated: false })
 
   return (
     <UserContext.Provider value={{ user, setUser }} >
