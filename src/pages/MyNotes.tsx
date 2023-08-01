@@ -10,7 +10,7 @@ import NotAuthorized from './NotAuthorized'
 
 export default function MyNotes() {
   const { userId } = useParams()
-  const { data, loading, refetch, networkStatus } = useQuery<GetUserAndNotesResponseData>(GET_USER_AND_NOTES, {
+  const { data, loading, networkStatus } = useQuery<GetUserAndNotesResponseData>(GET_USER_AND_NOTES, {
     context: { headers: { 'Authorization': localStorage.getItem('token') } },
     notifyOnNetworkStatusChange: true,
     fetchPolicy: 'cache-and-network'
@@ -42,7 +42,7 @@ export default function MyNotes() {
                 <>
                   {notes?.length !== 0 ? (
                     <div className='mt-20 flex flex-col gap-24 w-full items-center'>
-                      {notes?.map((note) => <Note key={note.id} id={note.id} body={note.body} priority={note.priority} status={note.status} title={note.title} refetchNotes={refetch} />)}
+                      {notes?.map((note) => <Note key={note.id} id={note.id} body={note.body} priority={note.priority} status={note.status} title={note.title} />)}
                     </div>
                   ) : (
                     <p className='text-white text-2xl mt-40 text-center'>You don't have any notes yet.</p>
