@@ -1,14 +1,21 @@
 import { useContext } from "react";
 import { UserContext } from "../App";
+import { userContextOnLocalStorage } from "../utils/userContextOnLocalStorage";
 
 export function useFetchUserContext() {
   const { user } = useContext(UserContext);
 
-  return Object.values(user).length
+  const isContextValid =
+    Object.keys(user).includes("name") &&
+    Object.keys(user).includes("avatar_url");
+
+  const { name, avatar_url } = userContextOnLocalStorage.get();
+
+  return isContextValid
     ? user
     : {
-        name: localStorage.getItem("name") || undefined,
-        avatar_url: localStorage.getItem("avatar_url") || undefined,
-        isAuthenticated: false,
+        name,
+        avatar_url,
+        isAuthenticated: name && avatar_url,
       };
 }
