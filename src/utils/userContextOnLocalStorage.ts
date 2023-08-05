@@ -8,4 +8,11 @@ export const userContextOnLocalStorage = {
     localStorage.removeItem("name");
     localStorage.removeItem("avatar_url");
   },
+
+  get() {
+    return {
+      name: localStorage.getItem("name"),
+      avatar_url: localStorage.getItem("avatar_url"),
+    };
+  },
 };
