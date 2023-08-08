@@ -16,6 +16,6 @@ export function useFetchUserContext() {
     : {
         name,
         avatar_url,
-        isAuthenticated: name && avatar_url,
+        isAuthenticated: Boolean(name && avatar_url),
       };
 }

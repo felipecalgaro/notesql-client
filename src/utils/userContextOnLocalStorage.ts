@@ -11,8 +11,8 @@ export const userContextOnLocalStorage = {
 
   get() {
     return {
-      name: localStorage.getItem("name"),
-      avatar_url: localStorage.getItem("avatar_url"),
+      name: localStorage.getItem("name") || undefined,
+      avatar_url: localStorage.getItem("avatar_url") || undefined,
     };
   },
 };
