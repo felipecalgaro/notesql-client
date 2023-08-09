@@ -33,10 +33,13 @@ export default function Header({ isLogged, userId }: HeaderProps) {
             </div>
             {isOpen && (
               <div className='bg-dark-gray-custom border-[#1c1c1c] border-t-0 border-custom w-40 py-4 xs:pl-8 pl-10 absolute right-2 xs:top-[4.5rem] top-16 text-left font-medium xs:text-lg text-base'>
-                <ul className='flex flex-col gap-y-1'>
+                <ul className='flex flex-col gap-y-0.5'>
                   <li><Link to={`/my-account/${userId}`}>My Account</Link></li>
+                  <hr className='text-center xs:mr-8 mr-10 opacity-50' />
                   <li><Link to={`/my-notes/${userId}`}>My Notes</Link></li>
+                  <hr className='text-center xs:mr-8 mr-10 opacity-50' />
                   <li><Link to={`/write-note/${userId}`}>Write Note</Link></li>
+                  <hr className='text-center xs:mr-8 mr-10 opacity-50' />
                   <li><Link to='/' onClick={handleLogOut}>Sign Out</Link></li>
                 </ul>
               </div>
