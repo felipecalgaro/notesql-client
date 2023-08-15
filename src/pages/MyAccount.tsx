@@ -32,11 +32,11 @@ export default function MyAccount() {
         <div className='bg-dark-gray-custom min-h-screen pb-20'>
           <Header isLogged userId={userId} />
           <main className='flex flex-col justify-center items-center h-full pt-20 gap-y-20'>
+            <p className='text-white text-5xl font-light text-center'>My Account</p>
             {loading ? (
-              <h1>Loading</h1>
+              <i className='mt-40 loader'></i>
             ) : (
               <>
-                <p className='text-white text-5xl font-light text-center'>My Account</p>
                 <img className='w-80 mt-10' src={data?.getUserAndNotes.avatar_url} alt="User avatar" />
                 <div className='w-full flex flex-col justify-center items-center'>
                   <InfoField fieldName='Name' fieldValue={data?.getUserAndNotes.name} />

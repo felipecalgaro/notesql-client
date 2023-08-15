@@ -37,7 +37,7 @@ export default function MyNotes() {
             <main className='flex flex-col justify-center items-center h-full xs:px-8 px-0 lg:gap-x-40 gap-x-20 pt-20'>
               <p className='text-white text-5xl font-light text-center'>My Notes</p>
               {loading || networkStatus === NetworkStatus.refetch ? (
-                <p className='text-white text-4xl mt-40'>Loading...</p>
+                <i className='mt-40 loader'></i>
               ) : (
                 <>
                   {notes?.length !== 0 ? (
