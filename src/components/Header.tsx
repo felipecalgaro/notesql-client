@@ -17,6 +17,7 @@ export default function Header({ isLogged, userId }: HeaderProps) {
 
   function handleLogOut() {
     userContextOnLocalStorage.remove()
+    localStorage.removeItem("token")
     setUser({ isAuthenticated: false, avatar_url: undefined, name: undefined })
   }
 
