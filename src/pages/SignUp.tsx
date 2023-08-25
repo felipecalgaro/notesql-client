@@ -40,7 +40,7 @@ export default function SignUp() {
   }, [data, navigate, setUser])
 
   return (
-    <div className='bg-dark-gray-custom h-screen relative overflow-hidden'>
+    <div className='bg-dark-gray-custom h-screen overflow-x-hidden relative'>
       <header>
         <nav className='flex justify-center items-center xs:px-10 px-3 py-4'>
           <Link to='/' className='text-white font-semibold text-4xl'>NotesQL</Link>
@@ -53,17 +53,17 @@ export default function SignUp() {
             <p className='text-white lg:text-6xl xs:text-5xl text-3xl font-medium text-center'>Sign Up to NotesQL</p>
             <p className='text-white lg:text-2xl xs:text-xl text-base text-center'>Already have an account? <Link to='/sign-in' className='text-light-secondary whitespace-nowrap'>Sign In</Link></p>
           </div>
-          <form onSubmit={handleSubmit} className='flex flex-col items-center justify-center gap-12'>
+          <form onSubmit={handleSubmit} className='flex flex-col items-center justify-center xs:gap-12 gap-6 z-10'>
             <Input name='name' id='name' label='Name' placeholder='Your name' type='text' />
             <Input name='email' id='email' label='Email' placeholder='Your email' type='email' />
             <Input name='password' id='password' label='Password' placeholder='Your password' type='password' />
             <ErrorMessage message={error?.message} />
-            <div className='flex justify-end items-center w-full pt-4 px-4'>
+            <div className='flex justify-end items-center w-full xs:pt-4 pt-0 px-4'>
               <Button isOutline={false} palette='secondary' text='Submit' loading={loading} />
             </div>
           </form>
         </div>
-        <img className='absolute h-1/2 md:-bottom-40 xs:-bottom-60 -bottom-52 md:-left-32 -left-60' src={BlobImage} alt="Blob image" />
+        <img className='z-0 absolute h-1/2 -bottom-48 -left-48' src={BlobImage} alt="Blob image" />
       </main>
     </div>
   )
