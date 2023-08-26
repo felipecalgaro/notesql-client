@@ -40,7 +40,7 @@ export default function SignUp() {
   }, [data, navigate, setUser])
 
   return (
-    <div className='bg-dark-gray-custom h-screen overflow-x-hidden relative'>
+    <div className='bg-dark-gray-custom h-screen xs:overflow-y-hidden overflow-y-auto overflow-x-hidden relative'>
       <header>
         <nav className='flex justify-center items-center xs:px-10 px-3 py-4'>
           <Link to='/' className='text-white font-semibold text-4xl'>NotesQL</Link>
