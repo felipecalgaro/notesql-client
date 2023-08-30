@@ -19,26 +19,29 @@ export default function WriteNote() {
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
 
-    const formData = new FormData(event.target as HTMLFormElement)
-    const { title, body } = Object.fromEntries(formData)
+    if (!loading) {
+      const formData = new FormData(event.target as HTMLFormElement)
+      const { title, body } = Object.fromEntries(formData)
 
-    try {
-      writeNote({
-        variables: {
-          note: {
-            title,
-            body,
+      try {
+        writeNote({
+          variables: {
+            note: {
+              title,
+              body,
+            }
+          },
+          context: {
+            headers: {
+              'Authorization': localStorage.getItem('token')
+            }
           }
-        },
-        context: {
-          headers: {
-            'Authorization': localStorage.getItem('token')
-          }
-        }
-      })
-    } catch (error) {
-      console.log(error);
+        })
+      } catch (error) {
+        console.log(error);
+      }
     }
+
   }
 
   useEffect(() => {
