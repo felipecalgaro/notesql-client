@@ -23,25 +23,20 @@ export default function WriteNote() {
       const formData = new FormData(event.target as HTMLFormElement)
       const { title, body } = Object.fromEntries(formData)
 
-      try {
-        writeNote({
-          variables: {
-            note: {
-              title,
-              body,
-            }
-          },
-          context: {
-            headers: {
-              'Authorization': localStorage.getItem('token')
-            }
+      writeNote({
+        variables: {
+          note: {
+            title,
+            body,
           }
-        })
-      } catch (error) {
-        console.log(error);
-      }
+        },
+        context: {
+          headers: {
+            'Authorization': localStorage.getItem('token')
+          }
+        }
+      })
     }
-
   }
 
   useEffect(() => {

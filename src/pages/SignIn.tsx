@@ -21,11 +21,7 @@ export default function SignIn() {
     const formData = new FormData(event.target as HTMLFormElement)
     const { email, password } = Object.fromEntries(formData)
 
-    try {
-      authenticateUser({ variables: { email, password } })
-    } catch (error) {
-      console.log(error);
-    }
+    authenticateUser({ variables: { email, password } })
   }
 
   useEffect(() => {

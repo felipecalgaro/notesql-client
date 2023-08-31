@@ -23,11 +23,7 @@ export default function SignUp() {
 
     if ([name, email, password].includes('')) return
 
-    try {
-      await createUser({ variables: { user: { name, email, password } } })
-    } catch (e) {
-      console.log(e);
-    }
+    createUser({ variables: { user: { name, email, password } } })
   }
 
   useEffect(() => {
