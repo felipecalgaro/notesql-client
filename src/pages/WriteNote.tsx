@@ -56,7 +56,7 @@ export default function WriteNote() {
             <p className='text-white text-5xl font-light text-center'>New Note</p>
             <form onSubmit={handleSubmit} className='flex flex-col items-start justify-center gap-12 pt-24 2xl:w-1/2 md:w-2/3 xs:w-3/4 w-full xs:px-0 px-2'>
               <Input name='title' id='title' label='' placeholder='Title' type='text' />
-              <textarea placeholder='Body' name="body" id="body" className='border-gray-custom border-custom rounded-custom bg-transparent text-zinc-200 font-light pl-4 xs:pr-20 pr-4 py-2 placeholder:font-light placeholder:text-gray-custom lg:text-2xl xs:text-xl text-lg w-full h-60'></textarea>
+              <textarea placeholder='Body' name="body" id="body" className='border-gray-custom border-custom rounded-custom bg-transparent text-zinc-200 font-light pl-4 xs:pr-20 pr-4 py-2 placeholder:font-light placeholder:font-urbanist font-sans placeholder:text-gray-custom lg:text-2xl xs:text-xl text-lg w-full h-60'></textarea>
               <div className='flex w-full justify-end items-center'>
                 <Button isOutline={false} palette='secondary' text='Submit' loading={loading} />
               </div>
