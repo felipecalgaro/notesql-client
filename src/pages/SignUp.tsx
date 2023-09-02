@@ -59,7 +59,7 @@ export default function SignUp() {
             </div>
           </form>
         </div>
-        <img className='z-0 absolute h-1/2 -bottom-48 -left-48' src={BlobImage} alt="Blob image" />
+        <img className='z-0 absolute h-1/2 -bottom-64 -left-48' src={BlobImage} alt="Blob image" />
       </main>
     </div>
   )
