@@ -50,7 +50,7 @@ export default function WriteNote() {
       {!isAuthenticated ? (
         <NotAuthorized />
       ) : (
-        <div className='bg-dark-gray-custom min-h-screen'>
+        <div className='bg-dark-gray-custom min-h-screen pb-8'>
           <Header isLogged userId={userId} />
           <main className='flex flex-col justify-center items-center h-full lg:px-40 md:px-12 px-0 pt-20'>
             <p className='text-white text-5xl font-light text-center'>New Note</p>
