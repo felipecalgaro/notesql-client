@@ -1,78 +1,28 @@
-# NotesQL Front-End
+# NotesQL Client
 
-Welcome to my NotesQL project! This readme will provide you with essential information about the project, its setup, usage, and other relevant details of the application.
+## What I Learned
+
+- How to handle user authentication using Context API from React and Local Storage
+- How to make autheticated requests to the GraphQL back-end using Apollo Client
+
+## Overview
+
+This is the client side of NotesQL. It's a platform for creating, reading, updating and deleting notes, with user creation and authentication. This website was built using React and Tailwind, and Apollo CLient for data fetching.
+
+The server side repository is in: [https://github.com/felipecalgaro/notesql-api](https://github.com/felipecalgaro/notesql-api)
 
 ## Table of Contents
 
-- [Project Overview](#project-overview)
 - [Features](#features)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Usage](#usage)
-- [Folder Structure](#folder-structure)
 - [Technologies Used](#technologies-used)
+- [Pages](#pages)
 - [License](#license)
-
-## Project Overview
-
-This project is the client side of a notes app built for studying purpose.
-
-- **NotesQL Project URL:** https://notesql-client.vercel.app/
 
 ## Features
 
-- User authentication and authorization
-- Interactive UI
-- Responsive design
-- API integration
 - Write, prioritize, check and delete a note
 - Profile stats
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js and npm installed
-
-### Installation
-
-Instructions for installing the project:
-
-1. Clone the repository: `git clone https://github.com/felipecalgaro/notesql-client.git`
-2. Navigate to the project directory: `cd notesql-client`
-3. Install dependencies: `npm install`
-
-## Usage
-
-Once it's installed, you can:
-
-- Run the development server: `npm run dev`
-- Build the project for production: `npm run build`
-
-## Folder Structure
-
-```
-/
-|-- src/
-| |-- assets/
-| |-- components/
-| |-- hooks/
-| |-- lib/
-| |-- pages/
-| |-- services/
-| |-- types/
-| |-- utils/
-| |-- App.tsx
-| |-- globals.css
-| |-- main.tsx
-|-- README.md
-|-- package.json
-|-- postcss.config.js
-|-- tailwind.config.js
-|-- tsconfig.json
-|-- vite.config.ts
-```
+- User authentication and authorization
 
 ## Technologies Used
 
